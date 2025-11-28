@@ -1,0 +1,6 @@
+# Virtual Envs
+gh_env/
+env/
+
+# Cache files
+__pycache__/
