@@ -1,6 +1,7 @@
 # Virtual Envs
-gh_env/
+eduvenv/
 env/
 
 # Cache files
+.vscode/
 __pycache__/
