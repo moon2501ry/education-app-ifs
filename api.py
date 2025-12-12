@@ -11,16 +11,18 @@ class Servers:
             self.o_keys[key]["Online"] = True;
         elif self.o_keys[key]["Online"]:
             self.o_keys[key]["Online"] = False;
-    def get(self,key:str,_var:str,default_value:any|None=None);
-        try:
-            self.o_keys[key][_var];
-        except:
-            self.o_keys[key][_var] = default_value;
+    def get(self,key:str,_var:str):
         return self.o_keys[key][_var];
     
 servers = Servers();
 
+@server.put("/add/{o_key}")
+def add(o_key: str):
+    servers.add_server(o_key);
+
 @server.get("/online/{o_key}")
 async def online(o_key: str):
-    if 
-    return {"Status":"online"}
+    if servers.get(o_key,"Online") == False:
+        return {"Status":"Offline"};
+    elif servers.get(o_key,"Online"):
+        return {"Status":"Online"};

@@ -1,16 +1,31 @@
 from pycli import *
 from config import ConfigTXT
 import random as rnd
+import requests as req
 import time
 
 def init():
     print("Iniciado");
+    global api
+    api = input("Digite a API da sua conta: ");
 
 def main():
     _input = input();
     params = get_params(_input);
     match get_command(_input):
         case "init_math":
+            match input("1 - Criar um novo servidor;\n2 - Conectar em um servidor;\n3 - Sair;\nOpção: "):
+                case "1":
+                    server_code = input("Digite o código do servidor: ");
+                    print("Criando um novo servidor...");
+                    print(req.put(api + "/add", params={"o_key": server_code}));
+                case "2":
+                    server_code = input("Digite o código do servidor: ");
+                    print("Conectando no servidor...");
+                    print(req.get(api + "/online", params={"o_key": server_code}));
+                case "3":
+                    print("Saindo...");
+                    exit();
             input("O jogo foi começou. Pressione Enter para continuar...");
             run = True
             while run:
