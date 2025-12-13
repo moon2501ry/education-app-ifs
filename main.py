@@ -1,8 +1,6 @@
 from pycli import *
 from config import ConfigTXT
-import random as rnd
 import requests as req
-import time
 
 def init():
     print("Iniciado");
@@ -18,11 +16,12 @@ def main():
                 case "1":
                     server_code = input("Digite o código do servidor: ");
                     print("Criando um novo servidor...");
-                    print(req.put(api + "/add", params={"o_key": server_code}));
+                    equation = req.put(api + f"/add_server/{server_code}").json()["Equation"];
+                    print(equation);
                 case "2":
                     server_code = input("Digite o código do servidor: ");
                     print("Conectando no servidor...");
-                    print(req.get(api + "/online", params={"o_key": server_code}));
+                    print(req.get(api + f"/online/{server_code}"));
                 case "3":
                     print("Saindo...");
                     exit();
@@ -30,11 +29,8 @@ def main():
             run = True
             while run:
                 clear();
-                operation = rnd.choice(["+","-"]);
-                number_1 = rnd.randint(0,100);
-                number_2 = rnd.randint(0,100);
-                result = (number_1 + number_2) if operation == "+" else (number_1 - number_2);
-                print(str(number_1)+""+operation+""+str(number_2));
+                print(f"{equation[1]}{equation[0]}{equation[2]}");
+                result = equation[-1];
                 result_user = input("Qual a Resposta? ");
                 if int(result_user) == result:
                     input("Você ganhou!!! Pressione Enter para continuar...");
