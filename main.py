@@ -1,5 +1,6 @@
 from pycli import *
 from config import ConfigTXT
+import time
 import requests as req
 
 def init():
@@ -40,14 +41,17 @@ def main():
                     print("Saindo...");
                     exit();
             clear();
+            if op:
+                req.put(api+f"/update/{server_code}");
             players = req.get(api+f"/players/{server_code}").json();
             while players["NmbPlayers"] < players["MaxPlayer"]:
                 print(f"Jogadores: {players["NmbPlayers"]}/{players["MaxPlayer"]}");
                 players = req.get(api+f"/players/{server_code}").json();
-            req.put(api+f"/update/{server_code}");
+                clear();
             equation = req.get(api+f"/get_equation/{server_code}").json()["Equation"];
             print(equation);
             input("O jogo começou. Pressione Enter para continuar...");
+            
             clear();
 
 if __name__ == "__main__":

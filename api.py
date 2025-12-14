@@ -21,7 +21,7 @@ class Servers:
         return self.o_keys[key]["Equation"];
     def connect_player(self,key:str,name:str):
         self.o_keys[key]["NmbPlayers"] += 1;
-        self.O_keys[key]["Players"].append(name);
+        self.o_keys[key]["Players"].append(name);
     def get(self,key:str,_var:str):
         return self.o_keys[key][_var];
     
