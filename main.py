@@ -45,13 +45,19 @@ def main():
                 req.put(api+f"/update/{server_code}");
             players = req.get(api+f"/players/{server_code}").json();
             while players["NmbPlayers"] < players["MaxPlayer"]:
-                print(f"Jogadores: {players["NmbPlayers"]}/{players["MaxPlayer"]}");
+                print(f"Jogadores: {players["NmbPlayers"]}/{players["MaxPlayer"]}\nNomes: {players["Players"]}");
+                time.sleep(15);
                 players = req.get(api+f"/players/{server_code}").json();
                 clear();
             equation = req.get(api+f"/get_equation/{server_code}").json()["Equation"];
+            print(f"Jogadores: {players["NmbPlayers"]}/{players["MaxPlayer"]}\nNomes: {players["Players"]}");
             print(equation);
-            input("O jogo começou. Pressione Enter para continuar...");
-            
+            input("Jogadores prontos? Pressione Enter para continuar...");
+            clear();
+            while True:
+                print(f"Equação: {equation[1]}{equation[0]}{equation[2]}\n");
+                result = input("Qual a resposta? ");
+                req.put()
             clear();
 
 if __name__ == "__main__":
