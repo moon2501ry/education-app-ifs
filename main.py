@@ -1,5 +1,4 @@
 from pycli import *
-from config import ConfigTXT
 import time
 import requests as req
 
